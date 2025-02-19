@@ -1,9 +1,7 @@
 import csv
 
-# Load movie data into a list of dictionaries
 movies = []
 
-# Read data from the provided text file (you can save it as a .txt and read it)
 movie_data = """Title,Director,Genre,Rating,Length (min),Notable Actors
 The Shawshank Redemption,Frank Darabont,Drama,R,142,Tim Robbins, Morgan Freeman
 Forrest Gump,Robert Zemeckis,Drama/Comedy,PG-13,142,Tom Hanks, Robin Wright
@@ -17,12 +15,7 @@ Hidden Figures,Theodore Melfi,Drama/History,PG,127,Taraji P. Henson, Octavia Spe
 The Martian,Ridley Scott,Sci-Fi/Drama,PG-13,144,Matt Damon, Jessica Chastain
 Inception,Christopher Nolan,Sci-Fi/Action,PG-13,148,Leonardo DiCaprio, Joseph Gordon-Levitt
 """
-# Here, I’ve truncated the movie list for brevity.
-# In practice, load this from a file:
-# with open('movies.txt', 'r') as file:
-#     movie_data = file.read()
 
-# Convert the data into a list of dictionaries
 reader = csv.DictReader(movie_data.strip().splitlines())
 for row in reader:
     movies.append({
