@@ -1,31 +1,22 @@
 import csv
 
+# Load movie data into a list of dictionaries
 movies = []
 
-movie_data = """Title,Director,Genre,Rating,Length (min),Notable Actors
-The Shawshank Redemption,Frank Darabont,Drama,R,142,Tim Robbins, Morgan Freeman
-Forrest Gump,Robert Zemeckis,Drama/Comedy,PG-13,142,Tom Hanks, Robin Wright
-Back to the Future,Robert Zemeckis,Sci-Fi/Adventure,PG,116,Michael J. Fox, Christopher Lloyd
-The Princess Bride,Rob Reiner,Adventure/Comedy,PG,98,Cary Elwes, Robin Wright
-Jurassic Park,Steven Spielberg,Sci-Fi/Adventure,PG-13,127,Sam Neill, Laura Dern, Jeff Goldblum
-E.T. the Extra-Terrestrial,Steven Spielberg,Sci-Fi/Family,PG,115,Henry Thomas, Drew Barrymore
-The Lion King,Roger Allers, Rob Minkoff,Animation/Family,G,88,James Earl Jones, Matthew Broderick
-Apollo 13,Ron Howard,Drama/History,PG,140,Tom Hanks, Kevin Bacon, Bill Paxton
-Hidden Figures,Theodore Melfi,Drama/History,PG,127,Taraji P. Henson, Octavia Spencer, Janelle Monáe
-The Martian,Ridley Scott,Sci-Fi/Drama,PG-13,144,Matt Damon, Jessica Chastain
-Inception,Christopher Nolan,Sci-Fi/Action,PG-13,148,Leonardo DiCaprio, Joseph Gordon-Levitt
-"""
-
-reader = csv.DictReader(movie_data.strip().splitlines())
-for row in reader:
-    movies.append({
-        'Title': row['Title'],
-        'Director': row['Director'],
-        'Genre': row['Genre'],
-        'Rating': row['Rating'],
-        'Length': int(row['Length (min)']),
-        'Actors': row['Notable Actors'].split(', ')
-    })
+# Read data from 'movies.txt' file
+with open('movies.txt', 'r', encoding='utf-8') as file:
+    reader = csv.reader(file)
+    headers = next(reader)  # Read the headers
+    
+    for row in reader:
+        movies.append({
+            'Title': row[0],
+            'Director': row[1],
+            'Genre': row[2],
+            'Rating': row[3],
+            'Length': int(row[4]),  # Convert length to integer
+            'Actors': row[5:]  # Remaining values are actors
+        })
 
 # Function to filter movies based on given criteria
 def filter_movies(genre=None, director=None, length_min=None, actors=None):
@@ -38,7 +29,7 @@ def filter_movies(genre=None, director=None, length_min=None, actors=None):
     if length_min:
         filtered = [movie for movie in filtered if movie['Length'] >= length_min]
     if actors:
-        filtered = [movie for movie in filtered if any(actor.lower() in movie['Actors'] for actor in actors)]
+        filtered = [movie for movie in filtered if any(actor.lower() in map(str.lower, movie['Actors']) for actor in actors)]
     
     return filtered
 
