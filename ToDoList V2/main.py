@@ -28,5 +28,20 @@
 #print(file.read())
 
 def add_items():
+    with open("ToDoList V2/ToDoList.txt", "a") as file:
+        file.write("\nLook ma Im doing it")
+
+def mark_items():
     with open("ToDoList V2/ToDoList.txt", "w") as file:
         file.write("\nLook ma Im doing it")
+
+def delete_items():
+    with open("ToDoList V2/ToDoList.txt", "w") as file:
+        file.write("\nLook ma Im doing it")
+
+def menu():
+    print("\n--- To Do List ---")
+    print("1. add items")
+    print("2. mark added items")
+    print("3. delete items")
+    print("4. exit")
