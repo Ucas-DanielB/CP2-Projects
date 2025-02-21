@@ -3,8 +3,8 @@ import csv
 # Load movie data into a list of dictionaries
 movies = []
 
-# Read data from 'movies.txt' file
-with open('movies.txt', 'r', encoding='utf-8') as file:
+# Read data from 'movies.csv' file
+with open('movie.csv', 'r', encoding='utf-8') as file:
     reader = csv.reader(file)
     headers = next(reader)  # Read the headers
     
@@ -33,7 +33,7 @@ def filter_movies(genre=None, director=None, length_min=None, actors=None):
     
     return filtered
 
-# Function to print the movie list nicely
+# Function to print the movie list 
 def print_movie_list(movie_list):
     if not movie_list:
         print("No movies found with the selected criteria.")
