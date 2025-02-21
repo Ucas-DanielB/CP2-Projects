@@ -4,10 +4,9 @@ import csv
 movies = []
 
 # Read data from 'movies.csv' file
-with open('movie.csv', 'r', encoding='utf-8') as file:
+with open('CP2-Projects/Movie Recommender/Movies list.csv', 'r', encoding='utf-8') as file:
     reader = csv.reader(file)
     headers = next(reader)  # Read the headers
-    
     for row in reader:
         movies.append({
             'Title': row[0],
