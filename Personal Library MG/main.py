@@ -1,13 +1,6 @@
-# Daniel Blanco, Personal Library Program
+#  Daniel Blanco
 
 # Personal Library Management Program
-
-# Pseudocode:
-# 1. Define a function to display the menu.
-# 2. Define a function to add a new book to the library.
-# 3. Define a function to search for a book by title or author.
-# 4. Define a function to remove a book by title.
-# 5. Use a while True loop to show the menu and call the appropriate functions.
 
 # Define a function to display the menu
 def display_menu():
@@ -23,19 +16,39 @@ def add_book(library):
     title = input("Enter the book title: ").strip()
     author = input("Enter the book author: ").strip()
     genres = input("Enter the book genres (comma-separated): ").strip()
+    year = input("Enter the year of publication: ").strip()
+    
     genres_set = set(genres.split(","))
     
-    library.append({"title": title, "author": author, "genres": genres_set})
+    library.append({
+        "title": title, 
+        "author": author, 
+        "genres": genres_set, 
+        "year": year
+    })
     print(f"Book '{title}' by {author} added successfully!")
 
-# Define a function to display all books
+# Define a function to display all books (Simple or Detailed)
 def display_books(library):
     if not library:
         print("No books in the library.")
-    else:
-        print("\n--- Library Catalog ---")
-        for idx, book in enumerate(library, 1):
-            print(f"{idx}. {book['title']} by {book['author']} (Genres: {', '.join(book['genres'])})")
+        return
+    
+    choice = input("View books in (1) Simple list or (2) Detailed list? Enter 1 or 2: ").strip()
+    
+    print("\n--- Library Catalog ---")
+    for idx, book in enumerate(library, 1):
+        if choice == "1":  # Simple list
+            print(f"{idx}. {book['title']} by {book['author']}")
+        elif choice == "2":  # Detailed list
+            print(f"{idx}. Title: {book['title']}")
+            print(f"   Author: {book['author']}")
+            print(f"   Genres: {', '.join(book['genres'])}")
+            print(f"   Year: {book['year']}")
+            print("---------------------------")
+        else:
+            print("Invalid choice. Showing simple list by default.")
+            print(f"{idx}. {book['title']} by {book['author']}")
 
 # Define a function to search for a book
 def search_book(library):
@@ -45,7 +58,7 @@ def search_book(library):
     if found_books:
         print("\n--- Search Results ---")
         for book in found_books:
-            print(f"{book['title']} by {book['author']} (Genres: {', '.join(book['genres'])})")
+            print(f"{book['title']} by {book['author']} (Genres: {', '.join(book['genres'])}, Year: {book['year']})")
     else:
         print("No books found matching your search.")
 
