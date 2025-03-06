@@ -4,7 +4,7 @@ import csv
 movies = []
 
 # Read data from 'movies.csv' file
-with open('CP2-Projects/MovieRecommender/MoviesList.csv', 'r') as file:
+with open('MovieRecommender/MoviesList.csv', 'r') as file:
     reader = csv.reader(file)
     headers = next(reader)  # Read the headers
     for row in reader:
