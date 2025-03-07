@@ -8,7 +8,7 @@ CHARACTER_FILE = "characters.csv"
 def main():
     """Main menu for RPG Character Management and Battle System."""
     while True:
-        print("\nRPG Character Manager")
+        print("\nBattle Simulator")
         print("1. Create Character")
         print("2. View Characters")
         print("3. Start Battle")
@@ -22,7 +22,7 @@ def main():
         elif choice == "3":
             battle_system()
         elif choice == "4":
-            print("Exiting the program. Goodbye!")
+            print("Goodbye!")
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
