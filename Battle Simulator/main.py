@@ -1,11 +1,11 @@
-#  Daniel Blanco, Battle Simulator
+# Daniel Blanco, Battle Simulator
 import csv
 import os
 import random
 
 CHARACTER_FILE = "characters.csv"
 
-def main():#When ran, user can select up to 4 choices
+def main():
     """Main menu for RPG Character Management and Battle System."""
     while True:
         print("\nBattle Simulator")
@@ -14,7 +14,7 @@ def main():#When ran, user can select up to 4 choices
         print("3. Start Battle")
         print("4. Exit")
         choice = input("Enter your choice: ").strip()
-            # Choices
+
         if choice == "1":
             create_character()
         elif choice == "2":
@@ -29,7 +29,7 @@ def main():#When ran, user can select up to 4 choices
 
 def create_character():
     """Creates a new character and saves it to a CSV file."""
-    def get_valid_input(prompt, min_value=1, max_value=100):# Created character receives a name, and a max amount of stats
+    def get_valid_input(prompt, min_value=1, max_value=100):
         """Helper function to get valid integer input within a range."""
         while True:
             try:
@@ -41,7 +41,7 @@ def create_character():
             except ValueError:
                 print("Invalid input. Please enter a number.")
 
-    print("\nCreate a New Character")# Every character has a name, health, strength, defense, speed, level, and experience that they can choose(except for levels and experience)
+    print("\nCreate a New Character")
     name = input("Enter character name: ").strip()
     health = get_valid_input("Enter Health (50-200): ", 50, 200)
     strength = get_valid_input("Enter Strength (5-50): ", 5, 50)
@@ -51,10 +51,10 @@ def create_character():
     experience = 0
 
     character = [name, health, strength, defense, speed, level, experience]
-    save_character(character)# The created character is saved into a csv file
+    save_character(character)
     print(f"Character '{name}' created successfully!")
-    
-def save_character(character):# Function for saving the characters into the csv file
+
+def save_character(character):
     """Saves a character to the CSV file."""
     file_exists = os.path.isfile(CHARACTER_FILE)
     with open(CHARACTER_FILE, "a", newline="") as file:
@@ -63,7 +63,7 @@ def save_character(character):# Function for saving the characters into the csv 
             writer.writerow(["Name", "Health", "Strength", "Defense", "Speed", "Level", "Experience"])
         writer.writerow(character)
 
-def load_characters():# Gets the saved characters to use
+def load_characters():
     """Loads characters from the CSV file."""
     if not os.path.isfile(CHARACTER_FILE):
         print("No characters found. Create a character first.")
@@ -81,11 +81,11 @@ def display_characters():
         return
 
     print("\nSaved Characters:")
-    for char in characters: # Displays the created characters that was saved
+    for char in characters:
         print(f"Name: {char[0]}, Health: {char[1]}, Strength: {char[2]}, Defense: {char[3]}, Speed: {char[4]}, Level: {char[5]}, XP: {char[6]}")
 
-def battle_system(): # Using characters to fight against each other
-    """Manages turn-based battles between two characters."""
+def battle_system():
+    """Manages turn-based battles between two characters with player choices."""
     characters = load_characters()
     if len(characters) < 2:
         print("Not enough characters to start a battle. Create at least two.")
@@ -105,40 +105,53 @@ def battle_system(): # Using characters to fight against each other
         print("Invalid input. Please enter a number.")
         return
 
-    player1 = characters[p1_index]
-    player2 = characters[p2_index]
-
-    def battle_round(attacker, defender): # Characters fight function
-        """Inner function to handle a single attack round."""
-        damage = max(1, int(attacker["Strength"]) - int(defender["Defense"]))
-        defender["Health"] = max(0, int(defender["Health"]) - damage)
-        print(f"{attacker['Name']} attacks {defender['Name']} for {damage} damage! {defender['Name']} now has {defender['Health']} HP.")
-
-    # Convert character list to dictionary for easier manipulation
-    player1 = {key: int(value) if key not in ["Name"] else value for key, value in zip(["Name", "Health", "Strength", "Defense", "Speed", "Level", "Experience"], player1)}
-    player2 = {key: int(value) if key not in ["Name"] else value for key, value in zip(["Name", "Health", "Strength", "Defense", "Speed", "Level", "Experience"], player2)}
-
-    # Determine attack order
-    if player1["Speed"] > player2["Speed"]:
-        attacker, defender = player1, player2
-    else:
-        attacker, defender = player2, player1
+    player1 = convert_to_dict(characters[p1_index])
+    player2 = convert_to_dict(characters[p2_index])
 
     print(f"\n{player1['Name']} VS {player2['Name']} - Battle Start!")
-    
+
     while player1["Health"] > 0 and player2["Health"] > 0:
-        battle_round(attacker, defender)
-        if defender["Health"] == 0:
-            print(f"{attacker['Name']} wins the battle!")
-            attacker["Experience"] += 10
-            level_up(attacker)
+        turn(player1, player2)
+        if player2["Health"] <= 0:
+            print(f"{player1['Name']} wins!")
+            player1["Experience"] += 10
+            level_up(player1)
             break
-        attacker, defender = defender, attacker  # Swap turns
+        turn(player2, player1)
+        if player1["Health"] <= 0:
+            print(f"{player2['Name']} wins!")
+            player2["Experience"] += 10
+            level_up(player2)
+            break
 
     update_character_stats(player1)
     update_character_stats(player2)
 
-def level_up(character): # After the battle, winner gains experience, this function adds levels and stats depending on if they won and have experience
+def turn(attacker, defender):
+    """Handles a single turn where the player chooses an action."""
+    print(f"\n{attacker['Name']}'s turn!")
+    print("1. Attack")
+    print("2. Defend")
+    print("3. Pass")
+    choice = input("Choose an action: ").strip()
+
+    if choice == "1":
+        attack(attacker, defender)
+    elif choice == "2":
+        defender["Defense"] += 5
+        print(f"{attacker['Name']} raises their defense!")
+    elif choice == "3":
+        print(f"{attacker['Name']} skips their turn.")
+    else:
+        print("Invalid choice, skipping turn.")
+
+def attack(attacker, defender):
+    """Calculates and applies attack damage."""
+    damage = max(1, attacker["Strength"] - defender["Defense"])
+    defender["Health"] = max(0, defender["Health"] - damage)
+    print(f"{attacker['Name']} attacks {defender['Name']} for {damage} damage! {defender['Name']} now has {defender['Health']} HP.")
+
+def level_up(character):
     """Levels up a character if they gain enough experience."""
     if character["Experience"] >= character["Level"] * 10:
         character["Level"] += 1
@@ -147,7 +160,7 @@ def level_up(character): # After the battle, winner gains experience, this funct
         character["Defense"] += 2
         print(f"{character['Name']} has leveled up to Level {character['Level']}!")
 
-def update_character_stats(character):  # After the winner gains more levels and stats, it is saved and updated in the csv file
+def update_character_stats(character):
     """Updates a character’s stats in the CSV file after a battle."""
     characters = load_characters()
     for i, char in enumerate(characters):
@@ -158,6 +171,11 @@ def update_character_stats(character):  # After the winner gains more levels and
         writer = csv.writer(file)
         writer.writerow(["Name", "Health", "Strength", "Defense", "Speed", "Level", "Experience"])
         writer.writerows(characters)
+
+def convert_to_dict(character):
+    """Converts a character list to a dictionary."""
+    keys = ["Name", "Health", "Strength", "Defense", "Speed", "Level", "Experience"]
+    return {keys[i]: int(character[i]) if i > 0 else character[i] for i in range(len(keys))}
 
 if __name__ == "__main__":
     main()
