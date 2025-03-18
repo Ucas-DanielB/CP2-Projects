@@ -5,7 +5,7 @@ import random
 
 CHARACTER_FILE = "characters.csv"
 
-def main(): # The first thing the user sees, by inputting numbers they can create and view their characters, and also start battles
+def main(): # The first thing the user sees, it allows you to create chracters and view them, start a battle and leave by inputting numbers
     "Main menu for RPG Character Management and Battle System."
     while True:
         print("\nBattle Simulator")
@@ -27,7 +27,7 @@ def main(): # The first thing the user sees, by inputting numbers they can creat
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
 
-def create_character(): # Creates a character, user can give them a name, amount of health, strength, defense, and speed
+def create_character(): # This function creates a character, you choose their name, health, strength, defense, and speed
     "Creates a new character and saves it to a CSV file."
     def get_valid_input(prompt, min_value=1, max_value=100):
         "Helper function to get valid integer input within a range."
@@ -49,13 +49,13 @@ def create_character(): # Creates a character, user can give them a name, amount
     speed = get_valid_input("Enter Speed (1-20): ", 1, 20)
     level = 1
     experience = 0
-# Every character thats created starts automatically with one level and zero experience
+    # With every new character, they always start with one level and zero experience
     character = [name, health, strength, defense, speed, level, experience]
     save_character(character)
     print(f"Character '{name}' created successfully!")
 
-def save_character(character): # newly created characters are saved onto a csv file
-    """Saves a character to the CSV file without overwriting existing ones."""
+def save_character(character): # Every new character is saved onto a csv file
+    "Saves a character to the CSV file without overwriting existing ones."
     file_exists = os.path.isfile(CHARACTER_FILE)
     
     with open(CHARACTER_FILE, "a", newline="") as file:
@@ -64,7 +64,7 @@ def save_character(character): # newly created characters are saved onto a csv f
             writer.writerow(["Name", "Health", "Strength", "Defense", "Speed", "Level", "Experience"])
         writer.writerow(character)
 
-def load_characters(): # If called, created characters can be viewed are brought to battle
+def load_characters(): # Saved characters can be loaded to be viewed or brought to battle
     "Loads characters from the CSV file, ensuring correct data format."
     if not os.path.isfile(CHARACTER_FILE):
         return []
@@ -79,7 +79,7 @@ def load_characters(): # If called, created characters can be viewed are brought
     
     return characters
 
-def display_characters(): # loaded characters can be displayed with their stats
+def display_characters(): # When loaded, characters can be displayed
     "Displays all saved characters."
     characters = load_characters()
     if not characters:
@@ -90,7 +90,7 @@ def display_characters(): # loaded characters can be displayed with their stats
     for char in characters:
         print(f"Name: {char[0]}, Health: {char[1]}, Strength: {char[2]}, Defense: {char[3]}, Speed: {char[4]}, Level: {char[5]}, XP: {char[6]}")
 
-def battle_system(): # starts the turn based battle
+def battle_system(): # Characters can fight each other if they are saved and loaded
     "Manages turn-based battles where players choose actions."
     characters = load_characters()
     if len(characters) < 2:
@@ -100,7 +100,7 @@ def battle_system(): # starts the turn based battle
     print("\nSelect two characters for battle:")
     for i, char in enumerate(characters):
         print(f"{i+1}. {char[0]}")
-    # selecting characters to fight, must require at least two characters to fight
+    # You must have at least two character to fight, and the fight is all turn based
     try:
         p1_index = int(input("Select first character (number): ")) - 1
         p2_index = int(input("Select second character (number): ")) - 1
@@ -113,7 +113,7 @@ def battle_system(): # starts the turn based battle
 
     player1 = characters[p1_index]
     player2 = characters[p2_index]
-    # battle 
+    # all of the turn based code
     player1 = {key: int(value) if key not in ["Name"] else value for key, value in zip(
         ["Name", "Health", "Strength", "Defense", "Speed", "Level", "Experience"], player1)}
     player2 = {key: int(value) if key not in ["Name"] else value for key, value in zip(
@@ -135,7 +135,7 @@ def battle_system(): # starts the turn based battle
             elif action == "2":
                 attacker["Defense"] += 2
                 print(f"{attacker['Name']} braces for impact, increasing defense!")
-
+            # Winner of the battle is determined if the opponents health reaches zero, winner gains experience and a level up
             if defender["Health"] == 0:
                 print(f"{attacker['Name']} wins the battle!")
                 attacker["Experience"] += 10
@@ -144,7 +144,7 @@ def battle_system(): # starts the turn based battle
                 update_character_stats(player2)
                 return
 
-def level_up(character): # After every battle, the winner gains a level and a boost in stats
+def level_up(character): # With every level up, the character gains a stat boost
     "Levels up a character if they gain enough experience."
     if character["Experience"] >= character["Level"] * 10:
         character["Level"] += 1
@@ -153,12 +153,12 @@ def level_up(character): # After every battle, the winner gains a level and a bo
         character["Defense"] += 2
         print(f"{character['Name']} has leveled up to Level {character['Level']}!")
 
-def update_character_stats(character): Characters that win have their new levels, experience, and stats updated to the csv file
+def update_character_stats(character): # Everytime the stats on a character is updated, the new info is saved onto the csv file
     "Updates an existing character’s stats in the CSV file after a battle."
     characters = load_characters()
     
     for i, char in enumerate(characters):
-        if char[0] == character["Name"]:  # Match by name
+        if char[0] == character["Name"]:  
             characters[i] = [
                 character["Name"], character["Health"], character["Strength"], 
                 character["Defense"], character["Speed"], character["Level"], character["Experience"]
