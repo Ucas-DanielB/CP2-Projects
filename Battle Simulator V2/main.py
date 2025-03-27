@@ -251,3 +251,6 @@ def plot_radar_chart(name, labels, values):
     ax.set_xticklabels(labels)
     ax.set_title(f"{name}'s Stats")
     plt.show()
+
+if __name__ == "__main__":
+    main()
