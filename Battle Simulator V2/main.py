@@ -51,9 +51,9 @@ def create_character():
                 value = int(input(prompt))
                 if min_value <= value <= max_value:
                     return value
-                else:
+                else: # Error message
                     print(f"Please enter a value between {min_value} and {max_value}.")
-            except ValueError:
+            except ValueError: # Error message
                 print("Invalid input. Please enter a number.")
 
     print("\nCreate a New Character")
