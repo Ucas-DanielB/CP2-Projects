@@ -23,6 +23,8 @@ This program calculates the minimum number of coins needed to make a given amoun
 ## Used Technologies
 Pandas:
 - pip install pandas
+
+
 NumPy:
 - pip install numpy
 
