@@ -1,28 +1,20 @@
 import csv
 
 def load_coins(country):
-    #Loads coin denominations from coins.csv for a given country.
+    # Loads coin denominations from coins.csv for a given country
     try:
-
-        # opens the coins csv page which has the currency for all the country in coins
-
-        with open("coins.csv", "r") as file: # Opens in read mode
+        # Opens csv file in read mode
+        with open("coins.csv", "r") as file:
             reader = csv.reader(file)
             for row in reader:
-
-                # csv file format
-
-                if row[0].lower() == country.lower():
+                # csv format 
+                if row[0].strip().lower() == country.lower():
                     coins = [item.split("-") for item in row[1:]]
                     return [(name, int(value)) for name, value in coins]
-                
-                
-        # Error message, invalid country in the coin file
-        print("Error: Country not found in the coin file.")
+        # Error messagewhen country is not inside the csv file
+        print("\n Error: Country not found in the coin file. Please try again.\n")
         return None
-    
-
     except FileNotFoundError:
-        # Erorr message, appears if the csv file is not there
-        print("Error: The coin file is missing.")
+        # Error message when there is no coin csv file
+        print("\n Error: The coin file is missing. Make sure 'coins.csv' is in the program directory.\n")
         return None
