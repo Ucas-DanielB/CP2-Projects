@@ -4,7 +4,7 @@ def load_coins(country):
     # Loads coin denominations from coins.csv for a given country
     try:
         # Opens csv file in read mode
-        with open("coins.csv", "r") as file:
+        with open("Coin Change Problem/coins.csv", "r") as file:
             reader = csv.reader(file)
             for row in reader:
                 # csv format 
