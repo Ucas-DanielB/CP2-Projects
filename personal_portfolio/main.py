@@ -1,4 +1,17 @@
 # Daniel Blanco, Personal Portfolio
 
-print('''Welcome to my personal portfolio, this program showcases all of my projects that I am most proud of 
-This program will in many ways serve as a programming resume for you so please make sure to make the user interfaces VERY intuitive.''')
+# from InquirerPy import prompt
+# 
+# questions = [
+#     {"type": "input", "message": "What's your name:", "name": "name"},
+#     {
+#         "type": "list",
+#         "message": "What's your favourite programming language:",
+#         "choices": ["Go", "Python", "Rust", "JavaScript"],
+#     },
+#     {"type": "confirm", "message": "Confirm?"},
+# ]
+# result = prompt(questions)
+# name = result["name"]
+# fav_lang = result[1]
+# confirm = result[2]
