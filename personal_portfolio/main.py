@@ -1,7 +1,8 @@
-# Daniel Blanco, Personal Portfolio
+# main.py
 
 from InquirerPy import prompt
 import subprocess
+
 from personal_battle_S import *
 from personal_movie_recommender import *
 from personal_finance_calc import *
@@ -12,6 +13,11 @@ from personal_tic_tac_toe import *
 
 # Introduction
 print("\n----- Personal Portfolio -----")
+
+
+# Introduction
+print("\nWelcome to Daniel Blanco's Personal Programming Portfolio!")
+
 print("This portfolio showcases several programming projects I've created.")
 print("Use the menu to learn more about each project and run them if you'd like.\n")
 
@@ -53,6 +59,7 @@ def main():
     print(f"{descriptions[project]}\n")
 
 
+
 #What the project does
 #
 #How you found the programming process
@@ -60,6 +67,7 @@ def main():
 #What you learned
 #
 #Your role (if it was a group project)
+
 
 
     run_question = [
@@ -82,4 +90,4 @@ def main():
     main()  # restart menu
 
 if __name__ == "__main__":
-    main()
+
