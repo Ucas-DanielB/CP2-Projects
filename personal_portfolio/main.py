@@ -9,6 +9,8 @@ print("This portfolio showcases several programming projects I've created.")
 print("Use the menu to learn more about each project and run them if you'd like.\n")
 
 def main():
+
+# The main user interface, gives a list of 7 options, allowing the user to choose 6 different projects to see
     questions = [
         {
             "type": "list",
@@ -31,11 +33,15 @@ def main():
     project = answer["project"]
     print(f"This is the project: {project}")
 
+    # This closes the program and prints a goodbye message
     if project == "Exit":
         print("Thanks for visiting my portfolio!")
         return
 
     descriptions = {
+    # This section of code goes over the details of each project
+    # Each discription goes overWhat the project does: How you found the programming process, What you learned, Your role (if it was a group project).
+
         "1. Personal Library (personal_P_library_MG.py)": "The project allows you to add, display, search, or remove books. The process of programming it was kind of annoying, as I couldn't get it right the first few times. I learned about different list types and how to utilize them in a project. This was an individual project.",
         "2. RPG Battle System (personal_battle_S.py)": "This project allowed the user to create characters and fight with them. It took me forever to finish the program, and proved to be one of the hardest programs to code I had done. I learned how to use dictionaries. This was an individual project.",
         "3. Finance Calculator (personal_finance_calc.py)": "A calculator made to allocate budget, time to save, compound/interest, sale price, and tip. The program was relatively easy to make, just figuring out how the math worked. I learned the different math calculations on code. This was an individual project.",
@@ -59,13 +65,15 @@ def main():
         }
     ]
 
-    
+
     should_run = prompt(run_question)["run"]
 
+    # it takes into account of the users request, y/n, and runs the program
     if should_run:
         filename = project.split('(')[1].split(')')[0]
         try:
             subprocess.run(["python", filename])
+        # Error message, the program didn't start
         except Exception as e:
             print(f"Failed to run {filename}: {e}")
 
