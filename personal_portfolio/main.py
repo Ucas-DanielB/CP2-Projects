@@ -15,19 +15,21 @@ def main():
             "message": "Select a project to learn more or run:",
             "name": "project",
             "choices": [
-                "1. Personal Library (personal_P-library-MG.py)",
+                "1. Personal Library (personal_P_library_MG.py)",
                 "2. RPG Battle System (personal_battle_S.py)",
-                "3. Finance Calculator (personal_finance-calc.py)",
-                "4. Movie Recommender (personal_movie-recommender.py)",
-                "5. Tic Tac Toe (personal_tic-tac-toe.py)",
-                "6. To-Do List (personal_to-do-list V2.py)",
+                "3. Finance Calculator (personal_finance_calc.py)",
+                "4. Movie Recommender (personal_movie_recommender.py)",
+                "5. Tic Tac Toe (personal_tic_tac_toe.py)",
+                "6. To-Do List (personal_to_do_list.py)",
                 "Exit"
             ]
         }
     ]
 
     answer = prompt(questions)
+    print(f"This is the 'answer' the user is giving {answer}")
     project = answer["project"]
+    print(f"This is the project: {project}")
 
     if project == "Exit":
         print("Thanks for visiting my portfolio!")
@@ -43,9 +45,12 @@ def main():
     }
 
 
+    # This is the menu of the project descriptions
     print("\n--- Project Description ---")
+    # this print the descriptions, with the project you chose
     print(f"{descriptions[project]}\n")
 
+    # User has to input a yes or no option, to see if they would like to run the code
     run_question = [
         {
             "type": "confirm",
@@ -54,6 +59,7 @@ def main():
         }
     ]
 
+    
     should_run = prompt(run_question)["run"]
 
     if should_run:
@@ -62,8 +68,6 @@ def main():
             subprocess.run(["python", filename])
         except Exception as e:
             print(f"Failed to run {filename}: {e}")
-
-    main()  # restart menu
 
 if __name__ == "__main__":
     main()
