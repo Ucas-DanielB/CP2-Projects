@@ -67,9 +67,9 @@ def main():
         elif choice == 5:
     # This section of code goes over the details of each project
     # Each discription goes overWhat the project does: How you found the programming process, What you learned, Your role (if it was a group project).
-            print("This")
-            print("")
-            print("\n")
+            print("This project takes an input from user for a phrase in english or more then translates between the two.")
+            print("The coding process for this was fun because it was kinda like solving a puzzle in a way.")
+            print("I learned diffrent methods of handling user inputs.\n")
             main_5()
         
         # Personal Library Code 
