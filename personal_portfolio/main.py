@@ -78,15 +78,5 @@ def main():
         except Exception as e:
             print(f"Failed to run {filename}: {e}")
 
-#    if should_run:
-#        file_to_run = projects[project_name]
-#        if os.path.isfile(file_to_run):
-#            try:
-#                subprocess.run([sys.executable, file_to_run])
-#            except Exception as e:
-#                print(f"An error occurred while running the file: {e}")
-#        else:
-#            print(f"Error: '{file_to_run}' not found. Please make sure the file is in the same folder.")
-
 if __name__ == "__main__":
     main()

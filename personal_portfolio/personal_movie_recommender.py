@@ -47,7 +47,7 @@ def print_movie_list(movie_list):
         print('-' * 40)
 
 # Main menu
-def main():
+def main_4():
     while True:
         print("\nWelcome to the Movie Recommendation Program!")
         print("1. Print all movies")
@@ -77,4 +77,4 @@ def main():
 
 # Run the program
 if __name__ == "__main__":
-    main()
+    main_4()
