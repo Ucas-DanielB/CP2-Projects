@@ -34,7 +34,7 @@ def calculate_tip(bill_amount, tip_percent):
     return bill_amount * (tip_percent / 100)
 
 # Main function to run the user interface
-def main():
+def main_3():
     while True:
         print("\nChoose an option:")
         print("1. Time to Save")
@@ -90,4 +90,4 @@ def main():
 
 # Run the program
 if __name__ == "__main__":
-    main()
+    main_3()

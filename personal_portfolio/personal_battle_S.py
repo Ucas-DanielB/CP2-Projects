@@ -7,7 +7,7 @@ import random
 # File where characters are stored
 CHARACTER_FILE = "characters.csv"
 
-def main():
+def main_2():
     # Main menu for RPG Character Management and Battle System.
     while True:
         # Display options
@@ -173,4 +173,4 @@ def update_character_stats(character):
         writer.writerows(characters)
 
 if __name__ == "__main__":
-    main()
+    main_2()

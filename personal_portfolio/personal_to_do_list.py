@@ -97,7 +97,7 @@ def delete_task():
     except ValueError:
         print("Invalid input! Please enter a number.\n")
 
-def main():
+def main_1():
     # Main loop to run the to-do list program.
     while True:
         print("To-Do List Menu:")
@@ -124,4 +124,4 @@ def main():
             print("Invalid choice! Please enter a number between 1-5.\n")
 
 if __name__ == "__main__":
-    main()
+    main_1()
