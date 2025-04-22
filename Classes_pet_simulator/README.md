@@ -1,59 +1,44 @@
-# Class Pet Simulator
+# Coin Change Problem
 
-## Project Description
+## Overview
 ---
 This program uses classes, and organizes the code to create a pet simulator. There are 6 different options to choose from, creating a pet, switching pets, showing the status, feeding the pet, playing with the pet, and putting them to sleep.
 
+## How to Run
+1. Run `main.py`
+2. Create pet
+3. Switch pet
+4. Show status
+5. Feed pet
+6. Play with pet
+7. Put pet to sleep
+8. Save and Exit
+
 ## Installation
----
-1. instruction one
-2. instruction two
-3. instruction three  
+1. Clone the repository or open the folder
+2. Ensure you have Python installed
+3. Install necessary extensions
 
 ## Execution and Usage
----
-Short Paragraph here maybe a bulletted list
-
-+ list item one
-+ list item two
-+ list item three
-
-![image](relative link to your image of the project working NOTE: image must be saved in the repository)  
+- Create a pet first
+- Enter a required information to store
+- Can interact with pet now, and receive different stats depending on actions.
 
 ## Used Technologies
 ---
-+ Name of tech - what it does in the project
-`pip install instructions`
-+ Name of tech - what it does in the project
-`pip install instructions`
-+ Name of tech - what it does in the project
-`pip install instructions`  
+There were no installations
 
 ## Current Features
----
-+ List of cool things your project does
-+ List of cool things your project does
-+ List of cool things your project does  
+1. Reads created pets on a file called pets.json, and stores info there.
+2. Allows you to "interact" with created pets.
+3. Provides detailed error handling for missing files and invalid inputs.
+4. Allows users to retry if an input error occurs.
+5. Outputs a status update of the pets if inputted.
 
-## Contributing
+## Contributors
 ---
-Do not add to this section  
++ Ucas-DanielB, made the program
 
-## Contribut0rs
+## Author's info 
 ---
-+ List of people who helped and what they did
-+ List of people who helped and what they did
-+ List of people who helped and what they did  
-
-## Author's info
----
-Short paragraph about you (each person in a group project)
-How to contact you if you want that available  
-
-## Change Log
----
-Do not add to this section  
-
-## License
----
-Do not add to this section
+Daniel Blanco, UCAS student in the United States of America Utah, a semester and a half of experience in programming.
