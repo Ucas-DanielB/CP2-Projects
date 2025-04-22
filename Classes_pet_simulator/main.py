@@ -1,6 +1,7 @@
 import random
 import json
 
+# Main class, handles all of the pet info
 class Pet:
     def __init__(self, name, species, age=0):
         self.name = name
@@ -13,34 +14,44 @@ class Pet:
         self.level = 1
         self.skills = []
 
+    # Function to feed pet with different stats and names
     def feed(self, food):
         effects = {
             "kibble": (10, 5),
             "treat": (5, 15),
             "meat": (20, 10)
         }
+        # Makes changes
         if food in effects:
             hunger_change, happiness_change = effects[food]
             self.hunger = max(0, self.hunger - hunger_change)
             self.happiness = min(100, self.happiness + happiness_change)
             self._advance_time()
         else:
+            # Error message for food
             print("Unknown food type.")
 
+    # Function to play with pet
     def play(self):
+        # Must have more than or equal to 10 energy to play and gain happiness
         if self.energy >= 10:
             self.happiness = min(100, self.happiness + 20)
+            # If Under 10, adds hunger
             self.energy -= 10
             self.hunger = min(100, self.hunger + 10)
         else:
+            # If no energy
             print(f"{self.name} is too tired to play.")
         self._advance_time()
 
+    # Functio to sleep
     def sleep(self):
+        # Can add enregy or hunger depending on stats
         self.energy = min(100, self.energy + 30)
         self.hunger = min(100, self.hunger + 5)
         self._advance_time()
 
+    # Function for the status display
     def status(self):
         print(f"\n{self.name}'s Status:")
         print(f"Species: {self.species}, Age: {self.age}, Level: {self.level}")
