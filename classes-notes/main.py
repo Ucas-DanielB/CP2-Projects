@@ -1,6 +1,7 @@
 # Daniel Blanco, Classes and Object Notes
 
-# A class is a blueprint for creating an object.
+# What is a class in Python?
+# -- A class is a blueprint for creating an object.
 class pokemon:
     def __init__(self, name, species, hp, dmg):
         self.name = name
@@ -32,5 +33,23 @@ print(fluffy.species)
 
 bob.battle(fluffy)
 
-# A method is a function specific to the class.
-# An object is a specific instance of a class.
+# What is an object in python?
+# -- An object is a specific instance of a class.
+
+# How do python classes relate to python objects?
+# -- A class is the blueprint and the object is the house built from the blueprint.
+
+# How do you create a python class?
+# -- You create a class by using the word "class", then the class name with a colon.
+
+# What are methods?
+# -- A method is a function specific to the class.
+
+# How do you create a python object?
+# -- You can create an object by calling the class, just like a function.
+
+# How to you call a method for an object?
+# -- You can call a method for an object by using a dot notation.
+
+# Why do we use python classes?
+# -- Python classes can help us organize our code better and reuse code.
